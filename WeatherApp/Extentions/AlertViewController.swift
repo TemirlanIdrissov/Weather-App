@@ -1,6 +1,6 @@
 import UIKit
 
-extension ExampleViewController {
+extension MainViewController {
     func presentSearchAlertController(withTitle title: String?, message: String?, style:
                                       UIAlertController.Style, completionHandler: @escaping(String) -> Void) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: style)

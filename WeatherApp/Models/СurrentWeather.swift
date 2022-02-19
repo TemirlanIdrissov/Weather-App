@@ -35,11 +35,19 @@ struct CurrentWeather {
         }
     }
     
+    let descriptionWeather: String
+    var descriptionWeatherCapitalized: String {
+        return descriptionWeather.capitalized
+    }
+    
     
     init?(currentWeatherData: CurrentWeatherData) {
         cityName = currentWeatherData.name
         temperature = currentWeatherData.main.temp
         feelsLikeTemperature = currentWeatherData.main.feels_like
         conditionCode = currentWeatherData.weather.first!.id
+        descriptionWeather = currentWeatherData.weather.first!.description
     }
+    
 }
+

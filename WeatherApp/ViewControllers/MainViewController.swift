@@ -1,14 +1,7 @@
-//
-//  ExampleViewController.swift
-//  WeatherApp
-//
-//  Created by Temirlan Idrissov on 17.02.2022.
-//
-
 import UIKit
 import SnapKit
 
-class ExampleViewController: UIViewController {
+class MainViewController: UIViewController {
     
     private let weatherIconImageView: UIImageView = {
         var icon = UIImageView()
@@ -30,11 +23,19 @@ class ExampleViewController: UIViewController {
         return labelText
     }()
     
+    private let subLabelText: UILabel = {
+       let labelText = UILabel()
+        var feelsLIke: String
+        labelText.font = .systemFont(ofSize: 17, weight: .regular)
+        return labelText
+    }()
+    
+    
     private let searchButton: UIButton =  {
         let button = UIButton()
         button.setTitle("Search", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .purple
+        button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 16
         button.addTarget(self,action: #selector(handleButton), for: .touchUpInside)
         return button
@@ -44,7 +45,6 @@ class ExampleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .blue
         setUpUi()
         networkWeatherManager.delegate = self
        
@@ -53,7 +53,7 @@ class ExampleViewController: UIViewController {
     private func setUpUi() {
         view.addSubview(searchButton)
         searchButton.snp.makeConstraints { make in
-            
+            make.height.equalTo(38)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
@@ -77,11 +77,16 @@ class ExampleViewController: UIViewController {
             make.bottom.equalTo(labelText.snp.top).offset(-15)
             make.centerX.equalToSuperview()
         }
+        
+        view.addSubview(subLabelText)
+        subLabelText.snp.makeConstraints { make in
+            make.top.equalTo(weatherText.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
+        }
+        
     }
     
     @objc private func handleButton() {
-//        let alert = UIAlertController(title: "Enter city name", message: nil, preferredStyle: .alert)
-//        self.present(alert, animated: true , completion: nil)
         self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) {city in
             self.networkWeatherManager.fetchCurrentWeather(forCity: city) 
         }
@@ -89,12 +94,12 @@ class ExampleViewController: UIViewController {
 
 }
 
-extension ExampleViewController: NetworkWeatherManagerDelegate {
-    
+extension MainViewController: NetworkWeatherManagerDelegate {
     func updateInterface(_: NetworkWeatherManager, with currentWeather: CurrentWeather) {
         DispatchQueue.main.async {
             self.labelText.text = currentWeather.cityName
             self.weatherText.text = currentWeather.temperatureToString  + " ℃"
+            self.subLabelText.text = "Feels like: " + currentWeather.feelsLikeTemperatureToString + " ℃. " + currentWeather.descriptionWeatherCapitalized
             self.weatherIconImageView.image = UIImage(systemName: currentWeather.systemIconNameString)
         }
     }
