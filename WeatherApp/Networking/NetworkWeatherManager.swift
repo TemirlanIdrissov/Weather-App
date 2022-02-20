@@ -1,10 +1,3 @@
-//
-//  NetworkWeatherManager.swift
-//  WeatherApp
-//
-//  Created by Temirlan Idrissov on 17.02.2022.
-//
-
 import Foundation
 
 protocol NetworkWeatherManagerDelegate: class  {
@@ -29,7 +22,7 @@ class NetworkWeatherManager {
         task.resume()
     }
     
-    func parseJSON(withData data: Data) -> CurrentWeather? {
+    private func parseJSON(withData data: Data) -> CurrentWeather? {
         let decoder = JSONDecoder()
         do {
             let currentWeatherData = try decoder.decode(CurrentWeatherData.self, from: data)

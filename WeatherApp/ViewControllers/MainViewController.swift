@@ -3,34 +3,37 @@ import SnapKit
 
 class MainViewController: UIViewController {
     
-    private let weatherIconImageView: UIImageView = {
+    var networkWeatherManager = NetworkWeatherManager()
+    
+    //MARK: -Weather Image Icon-
+    private lazy var weatherIconImageView: UIImageView = {
         var icon = UIImageView()
         let boldFont = UIFont.boldSystemFont(ofSize: 124)
         let configuration = UIImage.SymbolConfiguration(font: boldFont)
         return icon
     }()
-    
-    private let labelText: UILabel = {
+   
+    //MARK: -Label-
+    private lazy var labelText: UILabel = {
         let labelText = UILabel()
-        labelText.text = "Какая сегодня погода?"
+        labelText.text = "What's weather today?"
         labelText.font = .systemFont(ofSize: 34, weight: .semibold)
         return labelText
     }()
-    private let weatherText: UILabel = {
+    private lazy var weatherText: UILabel = {
         let labelText = UILabel()
-        labelText.text = ""
         labelText.font = .systemFont(ofSize: 34, weight: .semibold)
         return labelText
     }()
     
-    private let subLabelText: UILabel = {
+    private lazy var subLabelText: UILabel = {
        let labelText = UILabel()
         var feelsLIke: String
         labelText.font = .systemFont(ofSize: 17, weight: .regular)
         return labelText
     }()
     
-    
+    //MARK: -Button-
     private let searchButton: UIButton =  {
         let button = UIButton()
         button.setTitle("Search", for: .normal)
@@ -41,8 +44,13 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    var networkWeatherManager = NetworkWeatherManager()
+    @objc private func handleButton() {
+        self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) {city in
+            self.networkWeatherManager.fetchCurrentWeather(forCity: city)
+        }
+    }
     
+    //MARK: -View Did Load-
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUi()
@@ -50,6 +58,7 @@ class MainViewController: UIViewController {
        
     }
     
+    //MARK: -SetUp Ui-
     private func setUpUi() {
         view.addSubview(searchButton)
         searchButton.snp.makeConstraints { make in
@@ -86,14 +95,11 @@ class MainViewController: UIViewController {
         
     }
     
-    @objc private func handleButton() {
-        self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) {city in
-            self.networkWeatherManager.fetchCurrentWeather(forCity: city) 
-        }
-    }
+   
 
 }
 
+//MARK: -NetworkWeatherManagerDelegate-
 extension MainViewController: NetworkWeatherManagerDelegate {
     func updateInterface(_: NetworkWeatherManager, with currentWeather: CurrentWeather) {
         DispatchQueue.main.async {
@@ -103,6 +109,4 @@ extension MainViewController: NetworkWeatherManagerDelegate {
             self.weatherIconImageView.image = UIImage(systemName: currentWeather.systemIconNameString)
         }
     }
-    
-    
 }
