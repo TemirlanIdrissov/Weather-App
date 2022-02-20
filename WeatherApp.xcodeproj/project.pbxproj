@@ -85,7 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9FDE1727C152E800AEA254 /* ViewControllers */,
-				CE9FDE1627C1528F00AEA254 /* SupportThings */,
+				CE9FDE1627C1528F00AEA254 /* SupportingFiles */,
 				CE9FDE1527C1527700AEA254 /* Networking */,
 				CE93F76A27BE848100002D78 /* Extentions */,
 				CE93F76527BE7E1A00002D78 /* Models */,
@@ -118,7 +118,7 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		CE9FDE1627C1528F00AEA254 /* SupportThings */ = {
+		CE9FDE1627C1528F00AEA254 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
 				CE93F74B27BE3E7400002D78 /* AppDelegate.swift */,
@@ -126,7 +126,7 @@
 				CE93F75927BE3E7800002D78 /* Info.plist */,
 				CE93F76827BE7F6000002D78 /* Constants.swift */,
 			);
-			path = SupportThings;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		CE9FDE1727C152E800AEA254 /* ViewControllers */ = {
@@ -389,7 +389,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 54V283L38J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherApp/Info.plist;
+				INFOPLIST_FILE = WeatherApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -416,7 +416,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 54V283L38J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherApp/Info.plist;
+				INFOPLIST_FILE = WeatherApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
